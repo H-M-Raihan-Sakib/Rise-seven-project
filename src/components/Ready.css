@@ -1,0 +1,76 @@
+.ready {
+  height: 300vh; /* more scroll distance = smoother arc feel */
+  background: #eeece8;
+}
+
+/* sticky center container */
+.ready__center {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+}
+
+/* animated layer */
+.ready__inner {
+  will-change: transform;
+}
+
+/* text */
+.ready__title {
+  font-size: clamp(60px, 10vw, 180px);
+  font-weight: 800;
+  white-space: nowrap;
+  color: #0d0d0d;
+}
+
+/* ───────────────── MOBILE BUTTON ───────────────── */
+
+.ready-mobile {
+  display: none;
+}
+
+/* ───────────────── RESPONSIVE ───────────────── */
+
+@media (max-width: 768px) {
+
+  .ready--desktop {
+    display: none;
+  }
+
+  .ready-mobile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 32px 16px;
+
+    background: #eeece8;
+  }
+
+  .ready-mobile__btn {
+    width: 100%;
+    max-width: 420px;
+    height: 64px;
+    border: none;
+    border-radius: 999px;
+    background: #ffffff;
+    color: #0d0d0d;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition:
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+
+  .ready-mobile__btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+  }
+}

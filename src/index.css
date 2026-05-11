@@ -1,0 +1,43 @@
+/* ══════════════════════════════════════════════════════
+   SLIDE-HOVER UTILITY
+   Usage:
+     <div class="slide-hover">
+       <span class="slide-hover__out">Your Text</span>
+       <span class="slide-hover__in">Your Text</span>
+     </div>
+
+   - Hover parent (.slide-hover) → __out slides DOWN, __in slides UP
+   - Mouse leave               → reverses back
+   ══════════════════════════════════════════════════════ */
+
+.slide-hover {
+  position: relative;
+  overflow: hidden;
+  display: inline-block; /* shrink-wraps to content; change to block if needed */
+}
+
+/* Both layers share transition */
+.slide-hover__out,
+.slide-hover__in {
+  display: block;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* OUT — visible at rest, slides DOWN on hover */
+.slide-hover__out {
+  transform: translateY(0);
+}
+.slide-hover:hover .slide-hover__out {
+  transform: translateY(110%);
+}
+
+/* IN — hidden below at rest, slides UP on hover */
+.slide-hover__in {
+  position: absolute;
+  inset: 0;
+  transform: translateY(110%);
+}
+.slide-hover:hover .slide-hover__in {
+  transform: translateY(0);
+}
+

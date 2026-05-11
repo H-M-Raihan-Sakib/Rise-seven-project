@@ -1,0 +1,38 @@
+.header-alert {
+  background: var(--black);
+  color: var(--white);
+  height: var(--alert-h);
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+}
+
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 22s linear infinite;
+}
+
+.marquee-item {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  color: var(--white);
+  padding: 0 12px;
+  transition: color 0.2s;
+}
+
+.marquee-item:hover {
+  color: var(--accent);
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}

@@ -1,0 +1,263 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=Fraunces:wght@700;900&display=swap');
+
+/* ── Section: takes up exactly one viewport height in the page flow ── */
+.sc-section {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background: #F5F4F0;
+  overflow: hidden;
+}
+
+.legacy__eyebrow {
+  text-align: center;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #333333;
+  margin: 0 0 8px;
+}
+
+/* ── Internal scroll container ── */
+.sc-scroll {
+  position: absolute;
+  inset: 0;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  z-index: 6;
+}
+
+.sc-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.sc-snap-page {
+  height: 100%;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
+
+/* ── Card stage ── */
+.sc-stage {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 80px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Base card ── */
+.sc-card {
+  position: absolute;
+  width: 520px;
+  height: 570px;
+  border-radius: 26px;
+  padding: 28px 32px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.14), 0 2px 8px rgba(0,0,0,0.08);
+  transform-origin: center bottom;
+  will-change: transform, opacity;
+}
+
+/* ── Themes ── */
+.sc-card--dark  { background: #111111; color: #fff; }
+.sc-card--mint  { background: #a8ede0; color: #111; }
+.sc-card--white { background: #ffffff; color: #111; }
+
+/* ── Triangle accent (card 3) ── */
+.sc-triangle {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 85px solid transparent;
+  border-right: 85px solid transparent;
+  border-top: 105px solid #a8ede0;
+  z-index: 0;
+}
+
+/* ── Image ── */
+.sc-img-wrap {
+  width: 220px;
+  height: 200px;
+  border-radius: 16px;
+  overflow: hidden;
+  margin-bottom: 20px;
+  flex-shrink: 0;
+}
+
+.sc-card--white .sc-img-wrap { margin-top: 14px; }
+
+.sc-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── Typography ── */
+.sc-label {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  margin-bottom: 14px;
+  align-self: flex-start;
+  opacity: 0.75;
+}
+
+.sc-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 900;
+  font-size: 54px;
+  line-height: 1;
+  margin-bottom: 14px;
+  letter-spacing: -0.02em;
+}
+
+.sc-card--dark  .sc-title { color: #fff; }
+.sc-card--mint  .sc-title { color: #111; font-size: 48px; }
+.sc-card--white .sc-title { color: #111; }
+
+.sc-body {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 13.5px;
+  line-height: 1.65;
+  max-width: 360px;
+  font-weight: 400;
+}
+
+.sc-card--dark  .sc-body { color: rgba(255,255,255,0.85); }
+.sc-card--mint  .sc-body { color: rgba(0,0,0,0.78); }
+.sc-card--white .sc-body { color: rgba(0,0,0,0.72); }
+
+.sc-body--mt { margin-top: 12px; }
+
+/* ── Dots ── */
+.sc-dots {
+  position: absolute;
+  right: 28px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  z-index: 60;
+}
+
+.sc-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(0,0,0,0.2);
+  transition: background 0.3s, transform 0.3s;
+}
+
+.sc-dot--active {
+  background: #111;
+  transform: scale(1.45);
+}
+
+/* ── Responsive ── */
+.sc-mobile {
+  display: none;
+}
+
+@media (max-width: 768px) {
+
+  .sc-desktop {
+    display: none;
+  }
+
+  .sc-mobile {
+    display: block;
+    padding-bottom: 40px;
+  }
+
+  .sc-section {
+    height: auto;
+    min-height: auto;
+    overflow: hidden;
+    padding-top: 30px;
+  }
+
+  .sc-slider {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0 24px;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .sc-slider::-webkit-scrollbar {
+    display: none;
+  }
+
+  .sc-slide {
+    position: relative;
+    flex: 0 0 82vw;
+    max-width: 340px;
+    min-height: 520px;
+    border-radius: 28px;
+    padding: 28px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    scroll-snap-align: center;
+    overflow: hidden;
+    box-shadow:
+      0 8px 32px rgba(0,0,0,0.14),
+      0 2px 8px rgba(0,0,0,0.08);
+    transform: scale(0.94);
+    transition:
+      transform 0.35s ease,
+      box-shadow 0.35s ease;
+  }
+
+  .sc-slide--active {
+    transform: scale(1);
+    box-shadow:
+      0 16px 48px rgba(0,0,0,0.22),
+      0 4px 12px rgba(0,0,0,0.12);
+  }
+
+  .sc-slide.sc-card--dark  { background: #111; color: white; }
+  .sc-slide.sc-card--mint  { background: #a8ede0; color: #111; }
+  .sc-slide.sc-card--white { background: white; color: #111; }
+
+  .sc-slide .sc-img-wrap {
+    width: 150px;
+    height: 160px;
+    margin-bottom: 20px;
+  }
+
+  .sc-slide .sc-title { font-size: 38px; }
+
+  .sc-slide .sc-body {
+    font-size: 13px;
+    line-height: 1.55;
+  }
+
+  .sc-dots-mobile {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 24px;
+  }
+}

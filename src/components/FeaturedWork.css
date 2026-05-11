@@ -1,0 +1,308 @@
+/* ═══════════════════════════════════════
+   FeaturedWork — sticky left / scroll right
+   ═══════════════════════════════════════ */
+
+.fw, .fw * { box-sizing: border-box; }
+
+.fw {
+  display: flex;
+  align-items: flex-start;
+  background-color: #0d0d0d;
+  color: #fff;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  border-radius: 2rem;
+  margin: 1rem;
+  cursor: none;
+  position: relative;
+}
+
+/* ── CUSTOM CURSOR ── */
+.fw__cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 48px;
+  height: 48px;
+  background: #6ee7c0;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  translate: -50% -50%;
+  transition: opacity 0.2s ease;
+  will-change: transform;
+}
+
+/* ── LEFT sticky ── */
+.fw__left {
+  position: sticky;
+  top: 0;
+  width: 50%;
+  height: 100vh;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 36px 40px 36px 36px;
+  overflow: hidden;
+  z-index: 10;
+}
+
+.fw__label {
+  font-size: 25px;
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: auto;
+  flex-shrink: 0;
+}
+
+.fw__list-wrap {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+.fw__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  will-change: transform;
+}
+
+.fw__item {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  line-height: 1.05;
+  padding: 3px 0;
+}
+
+.fw__name {
+  font-size: clamp(24px, 3.4vw, 52px);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+  transition: color 0.35s ease;
+}
+
+.fw__years {
+  font-size: clamp(8px, 0.9vw, 12px);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  align-self: flex-start;
+  margin-top: 6px;
+  transition: opacity 0.35s ease;
+}
+
+/* States */
+.fw__item--future .fw__name  { color: rgba(255,255,255,0.18); }
+.fw__item--future .fw__years { opacity: 0; }
+.fw__item--active .fw__name  { color: #ffffff; }
+.fw__item--active .fw__years { opacity: 0.6; color: #ffffff; }
+.fw__item--past   .fw__name  { color: rgba(255,255,255,0.28); }
+.fw__item--past   .fw__years { opacity: 0.3; color: #ffffff; }
+
+/* ── RIGHT scrolling ── */
+.fw__right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 6px 6px 6px 0;
+}
+
+.fw__panel {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  border-radius: 1.6rem;
+  background-color: var(--panel-bg, #1a1a1a);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fw__hover-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: var(--hover-bg, #111);
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  z-index: 1;
+  border-radius: inherit;
+}
+.fw__panel--hovered .fw__hover-overlay { opacity: 1; }
+
+.fw__hover-text {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-start;
+  padding: 40px;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  pointer-events: none;
+}
+.fw__panel--hovered .fw__hover-text {
+  opacity: 1;
+  transform: translateY(0);
+}
+.fw__hover-text p {
+  font-size: clamp(28px, 3.5vw, 52px);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+  color: #111;
+  margin: 0 0 28px;
+  max-width: 480px;
+}
+.fw__hover-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #6ee7c0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.fw__img-wrap {
+  position: relative;
+  z-index: 2;
+  width: 78%;
+  height: 78%;
+  border-radius: 1.2rem;
+  overflow: hidden;
+  transition: transform 0.5s ease, opacity 0.45s ease;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.35);
+}
+.fw__panel--hovered .fw__img-wrap {
+  transform: scale(0.88) translateY(-12px);
+  opacity: 0;
+}
+.fw__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.fw__mobile-label { display: none; }
+
+.fw__tag {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  z-index: 4;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(255,255,255,0.13);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: #fff;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  padding: 6px 13px;
+  border-radius: 100px;
+  transition: background 0.3s ease;
+}
+.fw__panel--hovered .fw__tag {
+  background: rgba(0,0,0,0.18);
+  color: #111;
+  border-color: rgba(0,0,0,0.15);
+}
+
+@media (max-width: 768px) {
+  .fw {
+    flex-direction: column;
+    margin: 0.5rem;
+    border-radius: 1.2rem;
+    cursor: auto;
+  }
+  .fw__left { display: none; }
+  .fw__right { width: 100%; padding: 0; gap: 4px; }
+  .fw__right::before {
+    content: "Featured Work";
+    display: block;
+    font-size: 13px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.8);
+    padding: 20px 16px 12px;
+    letter-spacing: 0.02em;
+  }
+  .fw__panel {
+    height: 56vw;
+    min-height: 220px;
+    max-height: 320px;
+    border-radius: 1rem;
+    margin: 0 6px;
+  }
+  .fw__img-wrap {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 1rem;
+    box-shadow: none;
+    z-index: 1;
+  }
+  .fw__panel--hovered .fw__img-wrap { transform: none; opacity: 1; }
+  .fw__img-wrap::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.72) 0%, rgba(0,0,0,0.25) 55%, transparent 100%);
+    border-radius: inherit;
+    z-index: 2;
+  }
+  .fw__mobile-label {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    z-index: 5;
+  }
+  .fw__mobile-years {
+    font-size: 11px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.75);
+    letter-spacing: 0.04em;
+    margin-bottom: 2px;
+  }
+  .fw__mobile-name {
+    font-size: clamp(22px, 6vw, 32px);
+    font-weight: 900;
+    letter-spacing: -0.03em;
+    color: #ffffff;
+    line-height: 1;
+  }
+  .fw__tag {
+    bottom: auto;
+    top: 14px;
+    right: 14px;
+    font-size: 11px;
+    padding: 5px 11px;
+    background: rgba(255,255,255,0.18);
+    color: #fff;
+    border-color: rgba(255,255,255,0.25);
+  }
+  .fw__hover-overlay, .fw__hover-text { display: none; }
+  .fw__cursor { display: none; }
+}
