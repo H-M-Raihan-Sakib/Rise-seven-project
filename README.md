@@ -26,13 +26,13 @@ A pixel-perfect recreation of the homepage of https://riseatseven.com/ built for
 ## 1. Clone the repository
 
 ```bash
-git clone <your-repository-link>
+git clone https://github.com/H-M-Raihan-Sakib/Rise-seven-project.git
 ```
 
 ## 2. Navigate into the project
 
 ```bash
-cd <project-folder>
+cd Rise-seven-project
 ```
 
 ## 3. Install dependencies
